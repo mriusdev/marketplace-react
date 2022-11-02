@@ -1,0 +1,40 @@
+@use '../../../styles/utilities' as *;
+
+.categories__main__title {
+  font-size: $title-font-size;
+}
+
+.categories__container {
+  height: 10rem;
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  // TODO: move styling elsewhere
+  margin-top: 1rem;
+}
+
+.categories__category__container {
+  display: flex;
+  align-items: center;
+  column-gap: 1.2rem;
+  border-radius: 0.4rem;
+  padding: 0.2rem 0;
+  cursor: pointer;
+  // TODO: change the transition speed, etc
+  transition: all 0.1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+  &:hover {
+    background: $grey-clr;
+  }
+}
+
+.categories__category__logo {
+  padding: 0.5rem;
+  background: lightgray;
+  border-radius: 50%;
+}
+
+.categories__category__name {
+  font-weight: 500;
+}

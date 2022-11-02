@@ -1,5 +1,21 @@
-@use '../../styles/utilities' as utils;
+@use '../../styles/utilities' as *;
+@use '../../styles/media-query-related' as *;
 
-.test {
-  color: utils.$grey-clr;
+.main__container {
+  @include default-container-width;
+  display: grid;
+  grid-template-columns: 25% 1fr;
+  height: 30rem;
 }
+
+.sidenav__container {
+  border-right: 1px solid $grey-clr;
+}
+
+.listings__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem;
+  padding-left: 2rem;
+}
+

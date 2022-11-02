@@ -1,0 +1,16 @@
+@use './utilities' as *;
+
+@mixin cta-button {
+  background-color: $cta-clr;
+  color: $primary-clr;
+  font-size: $regular-font-size;
+  font-weight: 500;
+  padding: 0 2rem;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:active {
+    background-color: rgb(234, 164, 0);
+  }
+}

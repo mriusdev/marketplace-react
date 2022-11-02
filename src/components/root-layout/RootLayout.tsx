@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import { MainNavigation } from '../main-navigation/MainNavigation'
+import { RootNavCombined } from '../main-navigation/RootNavCombined'
 
 type Props = {
   children?: ReactNode
@@ -9,7 +9,7 @@ type Props = {
 export const RootLayout = ({children}: Props) => {
   return (
     <div className='container_root'>
-      <MainNavigation />
+      <RootNavCombined />
       <main>
         {children}
       </main>

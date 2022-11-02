@@ -1,0 +1,31 @@
+@use '../../../styles/utilities' as *;
+
+.card__container {
+  overflow: hidden;
+  // width: 15rem;
+  width: inherit;
+  height: 22rem;
+  background: $secondary-clr;
+  span {
+    display: block;
+  }
+}
+
+.image__wrapper img {
+  height: 14rem;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.card__price {
+  font-weight: bold;
+}
+
+.card__title {
+  font-weight: 500;
+}
+
+.card__description {
+  font-weight: 300;
+}

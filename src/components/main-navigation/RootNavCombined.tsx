@@ -4,7 +4,7 @@ import styles from './main-navigation.module.scss'
 import { MainNav } from './MainNav'
 import { SubNav } from './SubNav'
 
-export const MainNavigation = () => {
+export const RootNavCombined = () => {
   return (
     <>
       <nav>
