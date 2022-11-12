@@ -1,0 +1,25 @@
+@use '../../../styles/utilities' as *;
+
+.loading__container {
+  background: $secondary-clr;
+  z-index: 11;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loading__content__container {
+  align-items: center;
+  justify-items: center;
+  display: flex;
+  flex-direction: column;
+
+  // width: 100%;
+  // height: 100%;
+  span {
+    font-size: $logo-font-size;
+    font-weight: 600;
+  }
+}

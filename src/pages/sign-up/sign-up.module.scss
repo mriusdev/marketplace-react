@@ -1,0 +1,38 @@
+@use '../../styles/media-query-related' as *;
+@use '../../styles/utilities' as *;
+@use '../../styles/buttons' as *;
+
+
+
+.register__container {
+  @include default-container-width;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column
+}
+
+.submit_btn {
+  @include cta-button;
+  font-size: 1rem;
+  height: 2rem;
+}
+
+.error__container {
+  padding: 1.5rem;
+  background: rgba(224, 92, 92, 0.2);
+  border-radius: .5rem;
+}
+
+.error__text {
+  color: rgba(255, 84, 84, 0.9);
+  margin-bottom: 0.5rem;
+}
+
+.error__message {
+  color: rgba(255, 84, 84, 0.9);
+}

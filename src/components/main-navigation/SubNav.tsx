@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './main-navigation.module.scss'
 
@@ -13,7 +14,8 @@ export const SubNav = (props: Props) => {
           <span id={styles.sub_nav__profile} className="material-icons-outlined">person</span>
           <div className={styles.sub_nav__buttons_tooltip_nav}>
             <div>
-              Profile
+              <Link to={'users/andrius.m'}>Profile</Link>
+              {/* Profile */}
             </div>
             <div>
               Listings

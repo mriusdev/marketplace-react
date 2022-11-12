@@ -1,12 +1,16 @@
 import React, { FormEvent, useState } from 'react'
 
 import styles from './main-navigation.module.scss'
-
+import useCategories from '../../query-hooks/navigation-related/useCategories'
+import { ICategory } from '../../interfaces/categories'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {}
 
 export const MainNav = (props: Props) => {
+  const categories = useCategories();
   const [searchValue, setSearchValue] = useState<string>('')
+  const navigate = useNavigate()
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -15,7 +19,7 @@ export const MainNav = (props: Props) => {
 
   return (
     <div className={styles.main__nav_container}>
-      <div className={styles.main__nav__logo}>
+      <div className={styles.main__nav__logo} onClick={() => navigate('/listings')}>
         <span id={styles.main__nav__svg_logo} className="material-icons-outlined">storefront</span>
         <span id={styles.main__nav__logo_text}>Marketplace
           <br />Company
@@ -33,6 +37,9 @@ export const MainNav = (props: Props) => {
           <div className={styles.main__nav_flex} id={styles.main__nav_categories}>
             <select name="" id="">
               <option value="0">All Categories</option>
+              {categories.data.map((category: ICategory) => (
+                <option value={category.id}>{category.name}</option>
+              ))}
             </select>
           </div>
         </div>
