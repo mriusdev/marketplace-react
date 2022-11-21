@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react'
 
 import styles from './main-navigation.module.scss'
 import useCategories from '../../query-hooks/navigation-related/useCategories'
-import { ICategory } from '../../interfaces/categories'
+import { ICategory } from '../../interfaces'
 import { useNavigate } from 'react-router-dom'
 
 type Props = {}

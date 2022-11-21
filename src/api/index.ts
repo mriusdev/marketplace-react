@@ -1,9 +1,7 @@
-import axios from "axios";
+export { refreshToken } from './auth/refreshAPI'
+export { registerUser } from './auth/registerAPI'
+export { loginUser } from './auth/signinAPI'
 
-const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL
-})
+export { getAllCategories } from './categories/categoriesAPI'
 
-export {
-  instance as api
-}
+export { getMe } from './users/me/getMeAPI'

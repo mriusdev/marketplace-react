@@ -6,9 +6,7 @@ import { RootLayout } from './components/root-layout/RootLayout'
 function App() {
   return (
     <BrowserRouter>
-      {/* <RootLayout> */}
-        <AllRoutes />
-      {/* </RootLayout> */}
+      <AllRoutes />
     </BrowserRouter>
   )
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import styles from './categories.module.scss';
 import useCategories from '../../../query-hooks/navigation-related/useCategories';
-import { ICategory } from '../../../interfaces/categories';
+import { ICategory } from '../../../interfaces';
 
 type Props = {}
 
