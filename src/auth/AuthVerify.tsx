@@ -10,7 +10,11 @@ export const AuthVerify = (props: Props) => {
   const location = useLocation()
   const { mutateAsync, isLoading } = useRefresh()
   useEffect(() => {
-    handleAuthVerify()  
+    handleAuthVerify()
+    // return () => {
+    //   console.log('auth verify cleanup function ran');
+      
+    // }
   }, [location])
 
   const handleAuthVerify = async () => {

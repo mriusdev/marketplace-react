@@ -1,10 +1,6 @@
 import { IGetMeReturnData } from "../../../interfaces/users/get-me-return-data";
-import { api } from "../../apiConfig";
+import { privateAPI } from "../../apiConfig";
 
 export const getMe = async (): Promise<IGetMeReturnData> => {
-  return await api.get('/users/me', {
-    headers: {
-      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('at') || '{}')}`
-    }
-  }).then((res) => res.data);
+  return await privateAPI.get('/users/me').then((res) => res.data);
 }
