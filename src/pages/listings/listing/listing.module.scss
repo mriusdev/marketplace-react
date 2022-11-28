@@ -1,0 +1,18 @@
+@use '../../../styles/utilities' as *;
+@use '../../../styles/media-query-related' as *;
+
+.listing__container {
+  @include default-container-width;
+
+}
+
+.listing__content {
+  position: relative;
+}
+
+.listing__edit_btn {
+  padding: 0.5rem 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
