@@ -26,6 +26,7 @@ export const Listings = (props: Props) => {
               price={listing.price}
               title={listing.title}
               description={listing.description}
+              listingImages={listing.listingImages}
             />
           </Link>
           
