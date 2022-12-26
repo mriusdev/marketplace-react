@@ -20,3 +20,18 @@ export interface IUpdatedListing {
 export const updateListing = async ({formData, id}: IUpdatedListingParams): Promise<any> => {
   return await privateAPI.patch(`/listings/${id}`, formData).then((response) => response.data)
 }
+
+export interface IUpdatedListingImage {
+  id: number
+  path: string
+  file?: File
+}
+
+export interface IUpdatedListingImageParams {
+  updateImageFormData: FormData | undefined
+  id: string | undefined
+}
+
+export const updateListingImage = async ({updateImageFormData, id}: IUpdatedListingImageParams) => {
+  return await privateAPI.patchForm(`/listings/${id}/images`, updateImageFormData).then((response) => response.data)
+}

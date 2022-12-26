@@ -1,5 +1,7 @@
 @use '../../../styles/utilities' as *;
 @use '../../../styles/media-query-related' as *;
+@use '../../../styles/buttons' as *;
+
 
 .listing__container {
   @include default-container-width;
@@ -15,6 +17,12 @@
   position: absolute;
   top: 0;
   right: 0;
+  @include cta-button;
+  height: 2.25rem;
+  font-size: 0.83rem;
+  border-radius: 0;
+  color: #000000;
+  font-weight: 600;
 }
 
 .listing__form_container {
@@ -26,6 +34,7 @@
   width: 60%;
   height: 100%;
   padding: 1rem;
+  position: relative;
   // background-color: red;
 }
 
@@ -81,4 +90,51 @@
   margin-top: 0.6rem;
   margin-bottom: 1.2rem;
   font-weight: 600;
+}
+
+// EDIT
+.listing__image_edit_container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 2rem;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+}
+
+.listing__image_edit_pompt {
+  position: absolute;
+  background-color: $cta-clr;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  z-index: 3;
+}
+
+#listing__image_edit_icon {
+  padding: 0.4rem;
+}
+
+.listing__image_edit_actions {
+  display: flex;
+  height: 3rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $secondary-clr;
+  padding: 0.5rem 1rem;
+}
+
+.listing__image_save_button {
+  @include cta-button;
+  padding: 0.5rem 3rem;
+  font-size: 0.8rem;
+  background-color: $secondary-clr;
+  color: #000000;
 }
