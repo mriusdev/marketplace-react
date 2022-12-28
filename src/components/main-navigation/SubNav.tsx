@@ -23,7 +23,9 @@ export const SubNav = (props: Props) => {
           </div>
         </div>
         <div className={styles.sub_nav__buttons}>
-          <span className="material-icons-outlined">add_box</span>
+          <Link to={'create/listing'}>
+            <span className="material-icons-outlined">add_box</span>
+          </Link>
         </div>
       </div>
     </div>

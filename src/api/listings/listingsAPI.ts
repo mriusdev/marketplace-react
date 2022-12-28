@@ -1,4 +1,5 @@
 import { IListing } from "../../interfaces"
+import { IUpdatedListingImageParams } from "../../interfaces/listings/listingAPI"
 import { IFormData } from "../../pages/listings/listing/Listing"
 import { IUpdatedListingParams } from "../../query-hooks/listings/useUpdateListing"
 import { api, privateAPI } from "../apiConfig"
@@ -19,17 +20,6 @@ export interface IUpdatedListing {
 
 export const updateListing = async ({formData, id}: IUpdatedListingParams): Promise<any> => {
   return await privateAPI.patch(`/listings/${id}`, formData).then((response) => response.data)
-}
-
-export interface IUpdatedListingImage {
-  id: number
-  path: string
-  file?: File
-}
-
-export interface IUpdatedListingImageParams {
-  updateImageFormData: FormData | undefined
-  id: string | undefined
 }
 
 export const updateListingImage = async ({updateImageFormData, id}: IUpdatedListingImageParams) => {

@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import { AuthVerify } from "../auth/AuthVerify"
 import { ProtectedRoute } from "../auth/ProtectedRoute"
 import { RootLayout } from "../components/root-layout/RootLayout"
+import { CreateListing } from "../pages/create/listing/CreateListing"
 import { Home } from "../pages/home"
 import { Listing } from "../pages/listings/listing/Listing"
 import { Listings } from "../pages/listings/Listings"
@@ -28,6 +29,9 @@ export const AllRoutes = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/users">
               <Route index element={<SelfProfile />} path=':username' />
+            </Route>
+            <Route path="/create">
+              <Route path='listing' element={<CreateListing />}  />
             </Route>
           </Route>
 

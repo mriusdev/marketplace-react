@@ -1,0 +1,5 @@
+@use '../../../styles/media-query-related' as *;
+
+.create_listing__container {
+  @include default-container-width;
+}

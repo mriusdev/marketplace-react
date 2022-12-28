@@ -1,0 +1,55 @@
+@use '../../styles/utilities' as *;
+
+
+.steps__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.steps__step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 1.7rem;
+  width: 1.7rem;
+  margin: 0 0.5rem;
+  font-weight: 600;
+}
+
+.steps__step span {
+  padding: 0.8rem;
+}
+
+.active {
+  font-size: 0.8rem;
+  background-color: $primary-clr-2;
+  color: $primary-clr;
+}
+
+.inactive {
+  font-size: 0.8rem;
+  background-color: $primary-clr;
+  border: 0.15rem solid $grey-clr;
+  background-color: rgba($color: $grey-clr, $alpha: 0.3);
+}
+
+.steps__navigation {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.steps__button {
+  padding: 0.2rem 1rem;
+}

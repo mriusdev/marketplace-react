@@ -14,20 +14,10 @@ export interface IFormData {
   description?: string
 }
 
-interface IUpdateListingImagesFormData {
-  id: number
-  path: string
-  file?: File
-}
-
 export const Listing = () => {
   const { id } = useParams();
   const [toggleEdit, setToggleEdit] = useState<boolean>(false)
   const [toggleEditImages, setToggleEditImages] = useState<boolean>(false)
-  const [listingImageUpdateFormData, setListingImageUpdateFormData] = useState<IUpdateListingImagesFormData | undefined>({
-    id: 0,
-    path: ''
-  })
   const [formData, setFormData] = useState<IFormData>({
     title: '',
     price: '',
@@ -72,7 +62,6 @@ export const Listing = () => {
 
   const handleListingImageUpdate = async (e: FormEvent) => {
     e.preventDefault()
-    console.log('listing details',listingImageUpdateFormData);
     const updateImageFormData = new FormData()
     updateImageFormData.append('id', listing?.listingImages[0].id as any)
     updateImageFormData.append('path', listing?.listingImages[0].imageLocation as any)

@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { IUpdatedListingImageParams, updateListingImage } from "../../api/listings/listingsAPI";
-import { IListing } from "../../interfaces";
-import { IFormData } from "../../pages/listings/listing/Listing";
+import { updateListingImage } from "../../api/listings/listingsAPI";
 
 type Props = {
   id: string | undefined

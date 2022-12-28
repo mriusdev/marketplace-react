@@ -1,0 +1,7 @@
+@use '../../styles/utilities' as *;
+
+.horizontal_divider {
+  width: 100%;
+  height: 0.12rem;
+  background-color: $grey-clr;
+}
