@@ -4,6 +4,8 @@ type Props = {}
 
 export const Home = (props: Props) => {
   return (
-    <div>Home page</div>
+    <div>
+      <h1>Home page</h1>
+    </div>
   )
 }
