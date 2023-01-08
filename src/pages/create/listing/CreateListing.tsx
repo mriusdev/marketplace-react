@@ -1,7 +1,12 @@
-import React, { ChangeEvent, useRef, useState } from 'react'
+import { QueryCache } from '@tanstack/react-query'
+import React, { ChangeEvent, FormEvent, useRef, useState } from 'react'
+import { Navigate } from 'react-router'
 import { Steps } from '../../../components/create/Steps'
+import { LoadingScreen } from '../../../components/data-fetching/loading/LoadingScreen'
 import { ICategory } from '../../../interfaces'
+import useCreateListing from '../../../query-hooks/listings/useCreateListing'
 import useCategories from '../../../query-hooks/navigation-related/useCategories'
+import useMe from '../../../query-hooks/users/me/useMe'
 
 import styles from './create-listing.module.scss'
 
@@ -31,6 +36,7 @@ interface IFileObjects {
 }
 
 export const CreateListing = (props: Props) => {
+  const { data: userData, isError: userError } = useMe()
   const fileUploadRef = useRef<HTMLInputElement>(null)
   const categories = useCategories();
   const [listingTextData, setListingTextData] = useState<IListingTextData>({
@@ -39,12 +45,40 @@ export const CreateListing = (props: Props) => {
     price: 0,
     category: ''
   })
-  // const [files, setFiles] = useState<File[] | undefined>(undefined)
   const [fileObjects, setFileObjects] = useState<IFileObjects[] | [] | IFileObjects>([])
   const [imagePreviewUrls, setImagePreviewUrls] = useState<string[] | undefined>(undefined)
 
-  const handleCreateListing = () => {
+  const { mutateAsync: mutateCreateListingAsync } = useCreateListing()
+  if (!userData) {
+    return <LoadingScreen />
+  }
+  if (userError) {
+    return <Navigate to={'/login'} replace />
+  }
 
+  const handleCreateListing = async (e: FormEvent) => {
+    e.preventDefault()
+    const createListingFormData = new FormData()
+    createListingFormData.append('title', listingTextData.title)
+    createListingFormData.append('description', listingTextData.description)
+    createListingFormData.append('price', listingTextData.price as any)
+    createListingFormData.append('category', listingTextData.category)
+    if (!fileUploadRef.current) {
+      return
+    }
+    const currentFiles: FileList | null = fileUploadRef.current.files
+    if (!currentFiles) {
+      return;
+    }
+    for (const file of currentFiles) {
+      createListingFormData.append('files', file)
+    }
+    try {
+      await mutateCreateListingAsync({createListingFormData})
+      alert('listing created!')
+    } catch (error) {
+      console.log('listing create error', error);
+    }
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

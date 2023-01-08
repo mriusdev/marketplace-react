@@ -56,7 +56,7 @@ export const SelfProfile = (props: Props) => {
   if (userError) {
     console.log(userError);
     
-    return <Navigate to={'/signup'} replace />
+    return <Navigate to={'/login'} replace />
   }
 
 
