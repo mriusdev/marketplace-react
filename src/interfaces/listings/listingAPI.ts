@@ -6,3 +6,7 @@ export interface IUpdatedListingImageParams {
 export interface ICreateListingParams {
   createListingFormData: FormData | undefined
 }
+export interface IGetListingsParams {
+  perPage?: number
+  page?: number
+}

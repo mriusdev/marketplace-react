@@ -8,9 +8,11 @@ type Props = {
   redirectPath?: string
 }
 
-export const ProtectedRoute = ({redirectPath = '/signup'}: Props) => {
-  if (!AuthService.useGetAccessToken()) {
-    localStorage.removeItem('at');
+const DEFAULT_REDIRECT = '/signup';
+
+export const ProtectedRoute = ({redirectPath = DEFAULT_REDIRECT}: Props) => {
+  if (!AuthService.isLoggedIn()) {
+    AuthService.removeAuthDetailsFromLocalStorage();
     return <Navigate to={redirectPath} replace />
   }
   console.log("access token found but we don't know the validity of it");

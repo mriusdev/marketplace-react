@@ -7,6 +7,7 @@ import useListing from '../../../query-hooks/listings/useListing';
 import useUpdateListing, { IUpdatedListingParams } from '../../../query-hooks/listings/useUpdateListing';
 import useUpdateListingImage from '../../../query-hooks/listings/useUpdateListingImage';
 import styles from './listing.module.scss'
+import AuthService from '../../../auth/AuthService';
 
 export interface IFormData {
   title?: string
@@ -126,14 +127,19 @@ export const Listing = () => {
           <div className={styles.listing__read_container}>
             <div className={styles.listing__image_container}>
               <img src={ listing?.listingImages[0]?.imageLocation ? publicS3Url(listing.listingImages[0].imageLocation) : "https://source.unsplash.com/random/50×50/?shirt"} alt="" />
-              <div className={styles.listing__image_edit_pompt} onClick={() => setToggleEditImages(!toggleEditImages)}>
-                {toggleEditImages ? (
-                  <span id={styles.listing__image_edit_icon} className="material-icons-outlined">close</span>
-                ) : (
-                  <span id={styles.listing__image_edit_icon} className="material-icons-outlined">edit</span>
-                  
-                )}
-              </div>
+              {
+                AuthService.isLoggedIn() &&
+                <div
+                  className={styles.listing__image_edit_pompt}
+                  onClick={() => setToggleEditImages(!toggleEditImages)}
+                >
+                  {toggleEditImages ? (
+                    <span id={styles.listing__image_edit_icon} className="material-icons-outlined">close</span>
+                  ) : (
+                    <span id={styles.listing__image_edit_icon} className="material-icons-outlined">edit</span>
+                  )}
+                </div>
+              }
               {toggleEditImages && (
                 <form className={styles.listing__image_edit_container} onSubmit={handleListingImageUpdate}>
                   <div className={styles.listing__image_edit_actions}>
@@ -153,13 +159,16 @@ export const Listing = () => {
             </div>
           </div>
         )}
-        <button className={styles.listing__edit_btn} onClick={() => setToggleEdit(!toggleEdit)}>
-          {toggleEdit ? (
-            <span>Cancel</span>
-          ) : (
-            <span>Edit</span>
-          )}
-        </button>
+        {
+          AuthService.isLoggedIn() &&
+          <button className={styles.listing__edit_btn} onClick={() => setToggleEdit(!toggleEdit)}>
+            {toggleEdit ? (
+              <span>Cancel</span>
+            ) : (
+              <span>Edit</span>
+            )}
+          </button>
+        }
       </div>
     </div>
   )

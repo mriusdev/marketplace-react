@@ -25,7 +25,7 @@ export const Login = (props: Props) => {
     try {
       const data = await mutateAsync(formData)
       console.log('data that we get', data);
-      AuthService.useRegisterAuth(data?.access_token)
+      AuthService.addAuthDetailsToLocalStorage(data?.access_token)
     } catch (error: AxiosError | any) {
       setErrors(error?.response?.data)
     }
