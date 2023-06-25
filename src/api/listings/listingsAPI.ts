@@ -1,5 +1,5 @@
 import { IListing } from "../../interfaces"
-import { ICreateListingParams, IUpdatedListingImageParams } from "../../interfaces/listings/listingAPI"
+import { ICreateListingParams, IGetListingsParams, IUpdatedListingImageParams } from "../../interfaces/listings/listingAPI"
 import { IFormData } from "../../pages/listings/listing/Listing"
 import { IUpdatedListingParams } from "../../query-hooks/listings/useUpdateListing"
 import { api, privateAPI } from "../apiConfig"
@@ -10,8 +10,16 @@ export interface IUpdatedListing {
   data: IListing
 }
 
-export const getListings = async (): Promise<IListing[]> => {
-  return await api.get('/listings').then((response) => response.data.data)
+const DEFAULT_PER_PAGE = 2;
+const DEFAULT_PAGE = 1;
+
+export const getListings = async ({perPage = DEFAULT_PER_PAGE, page = DEFAULT_PAGE}: IGetListingsParams): Promise<any> => {
+  return await api.get('/listings', {
+    params: {
+      perPage,
+      page
+    }
+  }).then((response) => response.data.data)
 }
 
 export const createListing = async ({createListingFormData}: ICreateListingParams) => {

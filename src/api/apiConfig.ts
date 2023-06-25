@@ -19,7 +19,7 @@ privateInstance.interceptors.request.use(
 
     // if header is not present, then it's the first attempt
     if (!config?.headers['Authorization']) {
-      config.headers['Authorization'] = `Bearer ${AuthService.useGetAccessToken()}`
+      config.headers['Authorization'] = `Bearer ${AuthService.getAuthDetailsFromLocalStorage()}`
     }
     return config
   },

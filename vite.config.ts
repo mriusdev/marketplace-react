@@ -1,3 +1,6 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import jotaiDebuglabel from 'jotai/babel/plugin-debug-label'
@@ -9,5 +12,10 @@ export default defineConfig({
     babel: {
       plugins: [jotaiDebuglabel, jotaiReactRefresh]
     }
-  })]
+  })],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/tests/setup.ts']
+  }
 })

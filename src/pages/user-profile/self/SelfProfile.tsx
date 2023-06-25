@@ -13,7 +13,7 @@ type Props = {}
 
 export const SelfProfile = (props: Props) => {
   // const navigate = useNavigate();
-  // if (!AuthService.useGetAccessToken()) {
+  // if (!AuthService.getAuthDetailsFromLocalStorage()) {
   //   navigate('/signup')
   // }
 
@@ -48,6 +48,8 @@ export const SelfProfile = (props: Props) => {
     console.log('error is', error);
     
   }
+
+  AuthService.isLoggedIn();
           
 
   if (userLoading || userFetching) {
