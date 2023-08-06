@@ -1,23 +1,41 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams, createSearchParams } from 'react-router-dom'
 import { Card } from '../../components/listings/card/Card'
-import { CategoriesSidebar } from '../../components/listings/categories/CategoriesSidebar'
+import { CategoriesSidebar } from './categories/CategoriesSidebar'
 import { IListing } from '../../interfaces'
 import useListings from '../../query-hooks/listings/useListings'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './listings.module.scss'
 import { ListingsPagination } from './ListingsPagination'
+import { useStore } from '../../states/General'
+import { IGetListingsParams } from '../../interfaces/listings/listingAPI'
 
 export const Listings = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(getCurrentPage())
   const [pageNumbers, setPageNumbers] = useState<number[]>([])
+  const zustandCategory = useStore((state) => state.category);
 
-  const {data: listings, isLoading} = useListings({
-    page: currentPage,
-  })
+  function getSearchParams(): IGetListingsParams
+  {
+    const searchParamsObject: IGetListingsParams = {};
+    if (currentPage) {
+      searchParamsObject.page = currentPage;
+    }
+    if (zustandCategory) {
+      searchParamsObject.category = zustandCategory;
+    }
+    return searchParamsObject;
+  }
+
+  // const {data: listings, isLoading} = useListings({
+  //   page: currentPage,
+  //   category: zustandCategory,
+  // })
+
+  const {data: listings, isLoading} = useListings(getSearchParams())
 
   function getCurrentPage(): number
   {
@@ -62,7 +80,9 @@ export const Listings = () => {
     if (listings) {
       initializePageNumbers(listings.metadata.totalPages)
     }
-  }, [listings])
+    console.log('zustandCategory change action');
+    
+  }, [listings, zustandCategory])
 
   return (
     <div className={styles.main__container}>
@@ -93,6 +113,12 @@ export const Listings = () => {
         handleNextPage={nextPage}
         handleNavigateToPage={navigateToPage}
       />
+
+      {zustandCategory && (
+        <h3>
+          category is selected - {zustandCategory}
+        </h3>
+      )}
     </div>
   )
 }

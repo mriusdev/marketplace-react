@@ -13,11 +13,12 @@ export interface IUpdatedListing {
 const DEFAULT_PER_PAGE = 2;
 const DEFAULT_PAGE = 1;
 
-export const getListings = async ({perPage = DEFAULT_PER_PAGE, page = DEFAULT_PAGE}: IGetListingsParams): Promise<any> => {
+export const getListings = async ({perPage = DEFAULT_PER_PAGE, page = DEFAULT_PAGE, category}: IGetListingsParams): Promise<any> => {
   return await api.get('/listings', {
     params: {
       perPage,
-      page
+      page,
+      category
     }
   }).then((response) => response.data)
 }
