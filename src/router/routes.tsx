@@ -20,6 +20,7 @@ export const AllRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/listings">
             <Route index element={<Listings />} />
+            {/* <Route element={<Listings />} path="page/:page"/> */}
             <Route path=":id" element={<Listing />} />
           </Route>
 

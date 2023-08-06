@@ -19,7 +19,7 @@ export const getListings = async ({perPage = DEFAULT_PER_PAGE, page = DEFAULT_PA
       perPage,
       page
     }
-  }).then((response) => response.data.data)
+  }).then((response) => response.data)
 }
 
 export const createListing = async ({createListingFormData}: ICreateListingParams) => {

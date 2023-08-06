@@ -19,7 +19,7 @@ export const MainNav = (props: Props) => {
 
   return (
     <div className={styles.main__nav_container}>
-      <div className={styles.main__nav__logo} onClick={() => navigate('/listings?page=1&perPage=2')}> //TODO: finish testing this
+      <div className={styles.main__nav__logo} onClick={() => navigate('/listings?page=1&perPage=2')}>
         <span id={styles.main__nav__svg_logo} className="material-icons-outlined">storefront</span>
         <span id={styles.main__nav__logo_text}>Marketplace
           <br />Company
