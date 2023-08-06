@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useSearchParams, createSearchParams } from 'react-router-dom'
 import { Card } from '../../components/listings/card/Card'
 import { CategoriesSidebar } from '../../components/listings/categories/CategoriesSidebar'
 import { IListing } from '../../interfaces'
@@ -7,57 +7,50 @@ import useListings from '../../query-hooks/listings/useListings'
 import { useNavigate } from 'react-router-dom'
 
 import styles from './listings.module.scss'
-
-type Props = {
-  currentPage?: number
-  perPage?: number
-}
+import { ListingsPagination } from './ListingsPagination'
 
 export const Listings = () => {
-  // set these from query params on first route to this page
   const navigate = useNavigate()
-  const [currentPageState, setCurrentPageState] = useState(0)
-  console.log('currentPageState', currentPageState);
-  
-  const [searchParams] = useSearchParams()
-  let currentTestPage: string | number | null = searchParams.get('page')
-  let currentTestPerPage: string | number | null = searchParams.get('perPage')
-  if (currentTestPage) {
-  // debugger
-    currentTestPage = +currentTestPage
-    // setCurrentPageState(currentTestPage)
-  }
-  if (currentTestPerPage) {
-  // debugger
-    currentTestPerPage = +currentTestPerPage
-  }
-  console.log('page test page', currentTestPage);
-  console.log('page params', currentTestPerPage);
-
-  const {data: listings, isLoading} = useListings({
-    page: currentPageState,
-  })
-  
+  const [searchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(getCurrentPage())
   const [pageNumbers, setPageNumbers] = useState<number[]>([])
 
-  const navigateToPage = (pageNumber: number) => {
-    // debugger
-    navigate(`/listings?page=${pageNumber}`)
-    setCurrentPageState(pageNumber)
+  const {data: listings, isLoading} = useListings({
+    page: currentPage,
+  })
+
+  function getCurrentPage(): number
+  {
+    let currentTestPage: string | number | null = searchParams.get('page')
+    if (!currentTestPage) {
+      return 1;
+    }
+    return +currentTestPage;
   }
 
-  useEffect(() => {
-    if (listings) {
-      initializePageNumbers(listings.totalPages)
+  function navigateToPage(pageNumber: number): void {
+    navigate({
+      pathname: '/listings',
+      search: createSearchParams({ page: pageNumber.toString() }).toString()
+    })
+    setCurrentPage(pageNumber)
+  }
 
+  function nextPage(): void {
+    if(!listings?.metadata?.nextPage) {
+      return;
     }
-    if (currentTestPage) {
-      setCurrentPageState(+currentTestPage)
+    navigateToPage(++listings.metadata.currentPage);
+  }
 
+  function previousPage(): void {
+    if(!listings?.metadata?.previousPage) {
+      return;
     }
-  }, [listings, currentPageState])
+    setCurrentPage(--listings.metadata.currentPage)
+  }
 
-  function initializePageNumbers(totalPages: number) {
+  function initializePageNumbers(totalPages: number): void {
     let pageNumbersArray: number[] = [];
     for (let i = 1; i <= totalPages; i++) {
       pageNumbersArray.push(i);
@@ -65,21 +58,20 @@ export const Listings = () => {
     setPageNumbers(pageNumbersArray)
   }
 
+  useEffect(() => {
+    if (listings) {
+      initializePageNumbers(listings.metadata.totalPages)
+    }
+  }, [listings])
+
   return (
-    <div className={styles.main__container} style={{
-      gridTemplateRows: 'auto auto'
-    }}>
-      <section className={styles.sidenav__container} style={{
-        gridColumn: '1 / 2',
-        gridRow: '1 / 3'
-      }}>
+    <div className={styles.main__container}>
+      <section className={styles.sidenav__container}>
        <CategoriesSidebar />
       </section>
-      <section className={styles.listings__container} style={{
-        gridColumn: '2 / 3',
-        gridRow: '1 / 2'
-      }}>
-        {listings && listings.paginatedResults.map((listing: IListing) => (
+
+      <section className={styles.listings__container}>
+        {listings && listings.data.map((listing: IListing) => (
           <Link key={listing.id} to={`${listing.id}`}>
             <Card
               key={listing.id}
@@ -91,32 +83,16 @@ export const Listings = () => {
           </Link>
           
         ))}
-
-        
       </section>
-      <div style={{
-          display: 'flex',
-          width: '100%',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gridColumn: '2 / 3',
-          gridRow: '2 / 3'
-        }}>
-          <button>prev</button>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            columnGap: '0.5rem'
-          }}>
-            {pageNumbers.map((pageNumber, index) => (
-                <button onClick={() => navigateToPage(pageNumber)} key={index} style={
-                  pageNumber === currentTestPage ? {color: 'red', fontWeight: 'bold'} : {color: 'black'}
-                }>{pageNumber}</button>
-            ))}
-          </div>
-          <button>next</button>
-        </div>
+
+      <ListingsPagination
+        listings={listings}
+        isLoading={isLoading}
+        pageNumbers={pageNumbers}
+        handlePreviousPage={previousPage}
+        handleNextPage={nextPage}
+        handleNavigateToPage={navigateToPage}
+      />
     </div>
   )
 }

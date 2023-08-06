@@ -6,10 +6,13 @@
   display: grid;
   grid-template-columns: 25% 1fr;
   height: 30rem;
+  grid-template-rows: auto auto;
 }
 
 .sidenav__container {
   border-right: 1px solid $grey-clr;
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
 }
 
 .listings__container {
@@ -17,5 +20,76 @@
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 2rem;
   padding-left: 2rem;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
 }
 
+.listings_pagination {
+  border-top: 1px solid gray;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.listings_pagination__container {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-self: flex-end;
+  justify-content: space-between;
+  column-gap: 0.8rem;
+  width: fit-content;
+}
+
+.listings_pagination_page_numbers__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 0.5rem;
+}
+
+.listings_pagination_page_number {
+  padding: 0.4rem 0.63rem;
+  color: black;
+  background-color: rgb(247, 247, 247);
+  border: 1px solid rgb(195 195 195);
+  border-radius: 0.2rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.listings_pagination_page_number_active {
+  font-weight: 500;
+  border: 1px solid black;
+}
+
+.listings_pagination_navigation {
+  height: 30px;
+  width: 30px;
+  color: black;
+  border: none;
+  background: none;
+  border-radius: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(247, 247, 247)
+  }
+  &:disabled {
+    cursor: default;
+    color: rgb(67, 67, 67);
+    span {
+      font-size: 0.9rem;
+      color: rgb(184 184 184);
+    }
+    &:hover {
+      background: none;
+    }
+  }
+  span {
+    font-size: 0.9rem;
+  }
+}
