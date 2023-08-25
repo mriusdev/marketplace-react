@@ -3,19 +3,33 @@ import { useStore } from '../../../states/General';
 import styles from './categories.module.scss';
 import useCategories from '../../../query-hooks/navigation-related/useCategories';
 import { ICategory } from '../../../interfaces';
-
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 export function CategoriesSidebar() {
+  const navigate = useNavigate()
   const categories = useCategories();
-  const selectedCategory = useStore((state) => state.category);
-  const changeCategory = useStore((state) => state.changeCategory);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const listingFilters = useStore((state) => state.listingFilters);
+  const changeListingFilters = useStore((state) => state.changeListingFilters);
 
   function toggleCategory(categoryId: number): void
   {
-    if (selectedCategory !== categoryId) {
-      return changeCategory(categoryId);
+    if (listingFilters.category !== categoryId) {
+      navigate({
+        pathname: '/listings',
+        search: createSearchParams({ page: '1', category: categoryId.toString() }).toString()
+      })
+      return changeListingFilters({ category: categoryId});
     }
-    changeCategory(null)
+
+
+    searchParams.delete('category');
+    searchParams.set('page', '1');
+    setSearchParams(searchParams);
+    
+    changeListingFilters({ page: 1, category: null})
   }
 
   return <>
@@ -25,7 +39,7 @@ export function CategoriesSidebar() {
         <div
           onClick={() => toggleCategory(category.id)}
           key={category.id}
-          className={`${styles.categories__category__container} ${selectedCategory === category.id && styles.categories__selected}`}
+          className={`${styles.categories__category__container} ${listingFilters.category === category.id && styles.categories__selected}`}
         >
           <span className={`material-icons-outlined ${styles.categories__category__logo}`}>
             {category.iconClass}

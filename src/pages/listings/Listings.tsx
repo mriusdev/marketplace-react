@@ -9,49 +9,26 @@ import { useNavigate } from 'react-router-dom'
 import styles from './listings.module.scss'
 import { ListingsPagination } from './ListingsPagination'
 import { useStore } from '../../states/General'
-import { IGetListingsParams } from '../../interfaces/listings/listingAPI'
 
 export const Listings = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(getCurrentPage())
   const [pageNumbers, setPageNumbers] = useState<number[]>([])
-  const zustandCategory = useStore((state) => state.category);
+ 
+  const listingFilters = useStore((state) => state.listingFilters);
+  const changeListingFilters = useStore((state) => state.changeListingFilters);
+  
+  const searchParamsObject = Object.fromEntries([...searchParams]);
 
-  function getSearchParams(): IGetListingsParams
-  {
-    const searchParamsObject: IGetListingsParams = {};
-    if (currentPage) {
-      searchParamsObject.page = currentPage;
-    }
-    if (zustandCategory) {
-      searchParamsObject.category = zustandCategory;
-    }
-    return searchParamsObject;
-  }
-
-  // const {data: listings, isLoading} = useListings({
-  //   page: currentPage,
-  //   category: zustandCategory,
-  // })
-
-  const {data: listings, isLoading} = useListings(getSearchParams())
-
-  function getCurrentPage(): number
-  {
-    let currentTestPage: string | number | null = searchParams.get('page')
-    if (!currentTestPage) {
-      return 1;
-    }
-    return +currentTestPage;
-  }
-
+  const {data: listings, isLoading, isFetched} = useListings(listingFilters)
+  
   function navigateToPage(pageNumber: number): void {
     navigate({
       pathname: '/listings',
-      search: createSearchParams({ page: pageNumber.toString() }).toString()
+      search: createSearchParams({ ...searchParamsObject, page: pageNumber.toString() }).toString()
     })
-    setCurrentPage(pageNumber)
+    
+    changeListingFilters({...listingFilters, page: pageNumber})
   }
 
   function nextPage(): void {
@@ -65,7 +42,7 @@ export const Listings = () => {
     if(!listings?.metadata?.previousPage) {
       return;
     }
-    setCurrentPage(--listings.metadata.currentPage)
+    navigateToPage(--listings.metadata.currentPage);
   }
 
   function initializePageNumbers(totalPages: number): void {
@@ -80,9 +57,7 @@ export const Listings = () => {
     if (listings) {
       initializePageNumbers(listings.metadata.totalPages)
     }
-    console.log('zustandCategory change action');
-    
-  }, [listings, zustandCategory])
+  }, [listings, listingFilters])
 
   return (
     <div className={styles.main__container}>
@@ -91,7 +66,7 @@ export const Listings = () => {
       </section>
 
       <section className={styles.listings__container}>
-        {listings && listings.data.map((listing: IListing) => (
+        {listings?.data && listings?.data.length > 0 ? listings.data.map((listing: IListing) => (
           <Link key={listing.id} to={`${listing.id}`}>
             <Card
               key={listing.id}
@@ -101,8 +76,13 @@ export const Listings = () => {
               listingImages={listing.listingImages}
             />
           </Link>
-          
-        ))}
+        )) :
+        (
+          <div>
+            <h1>no listings found :( </h1>
+          </div>
+        )
+        }
       </section>
 
       <ListingsPagination
@@ -113,12 +93,6 @@ export const Listings = () => {
         handleNextPage={nextPage}
         handleNavigateToPage={navigateToPage}
       />
-
-      {zustandCategory && (
-        <h3>
-          category is selected - {zustandCategory}
-        </h3>
-      )}
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { IListing } from "../../interfaces"
 import { ICreateListingParams, IGetListingsParams, IUpdatedListingImageParams } from "../../interfaces/listings/listingAPI"
 import { IFormData } from "../../pages/listings/listing/Listing"
 import { IUpdatedListingParams } from "../../query-hooks/listings/useUpdateListing"
+import { ListingFilters } from "../../states/General"
 import { api, privateAPI } from "../apiConfig"
 
 export interface IUpdatedListing {
@@ -13,10 +14,9 @@ export interface IUpdatedListing {
 const DEFAULT_PER_PAGE = 2;
 const DEFAULT_PAGE = 1;
 
-export const getListings = async ({perPage = DEFAULT_PER_PAGE, page = DEFAULT_PAGE, category}: IGetListingsParams): Promise<any> => {
+export const getListings = async ({page = DEFAULT_PAGE, category}: ListingFilters): Promise<any> => {
   return await api.get('/listings', {
     params: {
-      perPage,
       page,
       category
     }
