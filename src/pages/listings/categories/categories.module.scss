@@ -25,13 +25,25 @@
   transition: all 0.1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 
   &:hover {
-    background: $grey-clr;
+    background-color: rgb(247, 247, 247)
+  }
+}
+
+.categories__selected {
+  color: rgb(64 64 64);
+  // background-color: rgb(197, 197, 197);
+  background-color: $cta-clr;
+  // background-color: $cta-clr-accent1;
+  // background-color: rgb(255, 245, 220);
+  outline: 1px solid black;
+  &:hover {
+    background-color: $cta-clr-accent1;
   }
 }
 
 .categories__category__logo {
   padding: 0.5rem;
-  background: lightgray;
+  // background: lightgray;
   border-radius: 50%;
 }
 
