@@ -17,10 +17,10 @@ export const Listings = () => {
  
   const listingFilters = useStore((state) => state.listingFilters);
   const changeListingFilters = useStore((state) => state.changeListingFilters);
-  
+
   const searchParamsObject = Object.fromEntries([...searchParams]);
 
-  const {data: listings, isLoading, isFetched} = useListings(listingFilters)
+  const {data: listings, isLoading} = useListings(listingFilters)
   
   function navigateToPage(pageNumber: number): void {
     navigate({
@@ -57,7 +57,15 @@ export const Listings = () => {
     if (listings) {
       initializePageNumbers(listings.metadata.totalPages)
     }
-  }, [listings, listingFilters])
+
+    if (document.referrer === "") {
+      changeListingFilters({
+        category: searchParamsObject.category ? +searchParamsObject.category : null,
+        page: searchParamsObject.page ? +searchParamsObject.page : 1
+      })
+    }
+    
+  }, [listings])
 
   return (
     <div className={styles.main__container}>
