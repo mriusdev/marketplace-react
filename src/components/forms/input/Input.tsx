@@ -6,11 +6,6 @@ export interface ICustomInputProps extends React.ComponentPropsWithRef<'input'> 
   validationmessage?: any 
 }
 
-// function rule(value: any): boolean|string
-// {
-//   return !!value || 'Field is required';
-// }
-
 function getClassName(): string
 {
   return styles.forms_input

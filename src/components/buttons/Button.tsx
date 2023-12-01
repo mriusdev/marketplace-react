@@ -15,7 +15,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = React.forwardRef<
   HTMLButtonElement, ButtonProps
 >(({...props}, ref) => {
-  // debugger
   return (
     <button
       ref={ref}
@@ -27,24 +26,11 @@ const Button = React.forwardRef<
 
 function getClassName(props: ButtonProps): string
 {
-  // if (!props.buttonType) {
-  //   return styles.button__primary;
-  // }
-
   if (props.secondary) {
     return styles.button__secondary;
   }
 
   return styles.button__primary;
- 
-  // switch (props) {
-  //   case props.primary:
-  //     return styles.button__primary;
-  //   case ButtonTypes.Secondary:
-  //     return styles.button__secondary;
-  //   default:
-  //     return styles.button__primary;
-  // }
 }
 
 export { Button };

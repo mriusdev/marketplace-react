@@ -1,6 +1,5 @@
 @use '../../styles/utilities' as *;
 
-
 .button {
   border: 0;
   padding: 0.6rem 1rem;
@@ -14,12 +13,6 @@
 }
 
 .button__primary {
-  // all: unset;
-  // padding: 0.35rem 0.8rem;
-  // border: 0.13rem solid $grey-clr;
-  // border-radius: 0.4rem;
-  // background-color: white;
-  // color: black;
   @extend .button;
   color: $clr-white;
   background-color: $main-clr-lighten-1;

@@ -23,7 +23,6 @@ export const AllRoutes = () => {
             <Route element={<ProtectedRoute />}>
               <Route path="create" element={<CreateListing />} />
             </Route>
-            {/* <Route element={<Listings />} path="page/:page"/> */}
             <Route path=":id" element={<Listing />} />
           </Route>
 
@@ -34,9 +33,6 @@ export const AllRoutes = () => {
             <Route path="/users">
               <Route index element={<SelfProfile />} path=':username' />
             </Route>
-            {/* <Route path="/create">
-              <Route path='listing' element={<CreateListing />}  />
-            </Route> */}
           </Route>
 
         </Route>
