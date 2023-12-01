@@ -1,0 +1,27 @@
+@use '../../styles/utilities' as *;
+
+.forms_validation_message {
+  font-size: 0.8rem;
+  color: $clr-warning;
+}
+
+.forms_input {
+  all: unset;
+  // padding: 0.35rem 0.8rem;
+  padding: 0.5rem 0.7rem;
+  // border: 0.13rem solid $grey-clr;
+  border: 0.1rem solid gainsboro;
+  border-radius: 0.4rem;
+  background-color: white;
+  color: black;
+}
+
+.dropdown_input {
+  border: 1px solid gainsboro;
+  border-radius: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+}

@@ -1,10 +1,23 @@
 // Colors
-$cta-clr: rgb(255, 178, 0);
+// $cta-clr: rgb(255, 178, 0);
+$cta-clr: #3665f3;
 $cta-clr-accent1: rgb(254, 203, 84);
 $grey-clr: rgb(140, 140, 140);
+$text-dark: #4d4d4d;
 $primary-clr: rgb(255, 255, 255);
 $primary-clr-2: rgb(39, 123, 192);
 $secondary-clr: rgb(255, 244, 207);
+
+$main-clr: #3665f3;
+$main-clr-darken-1: #203d92;
+$main-clr-darken-2: #0b1431;
+$main-clr-lighten-1: #5e84f5;
+$main-clr-lighten-2: #afc1fa;
+$main-clr-lighten-3: #d7e0fd;
+$main-clr-lighten-4: #ebf0fe;
+$clr-white: #ffff;
+
+$clr-warning: #ff4a4a;
 
 // Font General
 $small-font-size: 0.73rem;

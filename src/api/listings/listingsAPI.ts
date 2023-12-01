@@ -1,6 +1,7 @@
 import { IListing } from "../../interfaces"
 import { ICreateListingParams, IGetListingsParams, IUpdatedListingImageParams } from "../../interfaces/listings/listingAPI"
 import { IFormData } from "../../pages/listings/listing/Listing"
+import { ITemporaryImages } from "../../query-hooks/listings/usePostTemporaryImages"
 import { IUpdatedListingParams } from "../../query-hooks/listings/useUpdateListing"
 import { ListingFilters } from "../../states/General"
 import { api, privateAPI } from "../apiConfig"
@@ -37,4 +38,8 @@ export const updateListing = async ({formData, id}: IUpdatedListingParams): Prom
 
 export const updateListingImage = async ({updateImageFormData, id}: IUpdatedListingImageParams) => {
   return await privateAPI.patchForm(`/listings/${id}/images`, updateImageFormData).then((response) => response.data)
+}
+
+export const saveTemporaryImages = async (temporaryImages: ITemporaryImages): Promise<any> => {
+  return await privateAPI.postForm('/listings/temporary-images', temporaryImages).then((response) => response.data)
 }
