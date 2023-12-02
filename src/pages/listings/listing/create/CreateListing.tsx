@@ -381,13 +381,8 @@ export const CreateListing = () => {
                 style={{display: 'flex', flexDirection: 'column'}}
               >
                 <label htmlFor="category">Category</label>
-                {/* <Dropdown<ICategory>
-                  items={categories?.data}
-                  itemKey='id'
-                  itemValue='name'
-                  setValue={handleSetDropdownValue}
-                /> */}
-                <FormikDropdown
+                <Field
+                  component={FormikDropdown}
                   items={categories?.data}
                   itemKey='id'
                   itemValue='name'
@@ -399,8 +394,6 @@ export const CreateListing = () => {
                 style={{display: 'flex', flexDirection: 'column'}}
               >
                 <label htmlFor="title">Title</label>
-                {/* <Input type="text" name="title" id="title" value={listingTextData?.title} onChange={onChange}/> */}
-                {/* <Input type="text" name="title" id="title" validationmessage={formik.errors.title} value={formik.values.title} onChange={formik.handleChange}/> */}
                 <Field component={FormikInput} type="text" name="title" id="title" />
               </div>
               
@@ -408,9 +401,6 @@ export const CreateListing = () => {
                 style={{display: 'flex', flexDirection: 'column'}}
               >
                 <label htmlFor="price">Price</label>
-                {/* <Input type="text" name="price" id="price" value={listingTextData?.price} onChange={onChange}/> */}
-                {/* <Input type="text" name="price" id="price" validationmessage={formik.errors.price} value={formik.values.price} onChange={formik.handleChange} /> */}
-                {/* <Input type="text" name="price" id="price" validationmessage={formik.errors.price} value={formik.values.price} onChange={formik.handleChange} /> */}
                 <Field component={FormikInput} type="text" name="price" id="price" />
               </div>
               
@@ -418,8 +408,6 @@ export const CreateListing = () => {
                 style={{display: 'flex', flexDirection: 'column'}}
               >
                 <label htmlFor="description">Description</label>
-                {/* <Input type="text" name="description" id="description" value={listingTextData?.description} onChange={onChange}/> */}
-                {/* <Input type="text" name="description" id="description" validationmessage={formik.errors.description} value={formik.values.description} onChange={formik.handleChange}/> */}
                 <Field component={FormikInput} type="text" name="description" id="description" />
               </div>
               

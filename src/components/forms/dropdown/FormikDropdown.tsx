@@ -1,46 +1,38 @@
 import React from "react";
 import { Dropdown } from "./Dropdown";
 import { IDropdownProps } from "./Dropdown";
-import { useField, useFormikContext } from "formik";
+import { useFormikContext, FieldProps } from "formik";
 
-interface IFormikDropdownProps extends IDropdownProps{
-  name: keyof IFormErrorsValidationObject
+interface IFormikDropdownProps extends IDropdownProps {
+  name: string
 }
 
-interface IFormErrorsValidationObject {
-  title: string
-  description: string
-  price: string
-  category: string
-}
-
-export function FormikDropdown(props: IFormikDropdownProps) {
-  const [field] = useField(props.name);
-  const { setFieldValue, errors } = useFormikContext<IFormErrorsValidationObject>();
-  console.log('current dropdown errors', errors);
+export function FormikDropdown({field, form: {errors}, ...props}: IFormikDropdownProps & FieldProps) {
+  const { setFieldValue } = useFormikContext();
   
-
-  function getValidationMessage(): string {
-    if (props.name === undefined) {
+  function getValidationMessage(): string
+  {
+    if (!errors || typeof errors[field.name] !== 'string') {
       return ''
     }
 
-    return errors ? (errors[props.name] ?? '') : ''
+    return errors[field.name] as string; 
   }
 
-  const validationMessageFromFn: string = getValidationMessage();
+  const validationMessage: string = getValidationMessage();
 
-  const handleChange = (value: any) => {
+  const handleChange = (value: any): void => {
     if (typeof field.name !== 'string') {
       return;
     }
     setFieldValue(field.name, value);
   }
+
   return (
     <Dropdown
       {...props}
       setValue={handleChange}
-      validationMessage={validationMessageFromFn}
+      validationMessage={validationMessage}
     />
   )
 }

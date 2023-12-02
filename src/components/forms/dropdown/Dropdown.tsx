@@ -13,7 +13,7 @@ export interface IDropdownProps {
 export function Dropdown({items, itemKey, itemValue, setValue, validationMessage}: IDropdownProps) {
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<any>(null);
-
+  
   function toggleDropdown(): void {
     setIsDropdownVisible(!isDropdownVisible);
   }
