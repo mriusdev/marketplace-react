@@ -1,12 +1,13 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveTemporaryImages } from "../../api/listings/listingsAPI";
 
-export interface ITemporaryImages {
-  files: File[]
-}
+export default function usePostTemporaryImages() {
+  const queryClient = useQueryClient()
 
-export default function usePostTemporaryImages(temporaryImages: ITemporaryImages) {
   return useMutation({
-    mutationFn: saveTemporaryImages
+    mutationFn: saveTemporaryImages,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['listings'])
+    }
   })
 }

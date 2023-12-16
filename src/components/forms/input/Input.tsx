@@ -1,9 +1,10 @@
 import React from 'react';
 
 import styles from '../forms.module.scss';
+import { Button } from '../../buttons/Button';
 
 export interface ICustomInputProps extends React.ComponentPropsWithRef<'input'> {
-  validationmessage?: any 
+  validationmessage?: any
 }
 
 function getClassName(): string
@@ -14,10 +15,29 @@ function getClassName(): string
 const Input = React.forwardRef<
   HTMLInputElement, ICustomInputProps
 >(({...props}, ref) => {
-  // console.log('getting props in custom input', props);
+  // const propsCopy = {
+  //   ...props
+  // }
+  // props = propsCopy
   if (props.className === undefined) {
     delete props.className;
   }
+
+  if (props.type === 'file') {
+    return (
+      <div className={styles.forms_input_container}>
+        <Button disabled={props.disabled}>
+          Select files
+        </Button>
+        <input 
+          {...props}
+          className={styles.forms_input_file}
+          ref={ref}
+        />
+      </div>
+    )
+  }
+
   return <>
     <input
       ref={ref}

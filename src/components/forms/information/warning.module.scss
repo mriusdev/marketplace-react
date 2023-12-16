@@ -1,0 +1,39 @@
+@use '../../../styles/utilities' as *;
+
+.information__container {
+  display: flex;
+  padding: 0.5rem 0.3rem;
+  column-gap: 0.2rem;
+  
+  border-radius: 0.5rem;
+  font-size: 0.93rem;
+}
+
+.information__container_warning {
+  color: $clr-warning-text;
+  background: $clr-warning-backgound;
+  border: 0.12rem solid $clr-warning-border;
+}
+
+.information__container_success {
+  color: $clr-success-text;
+  background: $clr-success-background;
+  border: 0.12rem solid $clr-success-border;
+}
+
+.information_icon__container {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem;
+}
+
+.information_message__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 0.2rem;
+}
+
+.information_message__title {
+  font-weight: 500;
+}

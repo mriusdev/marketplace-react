@@ -6,8 +6,7 @@ export default function useCreateListing() {
 
   return useMutation({
     mutationFn: createListing,
-    onSuccess: (response: any) => {
-      console.log('after query update', response);
+    onSuccess: () => {
       queryClient.invalidateQueries(['listings'])
     }
   })

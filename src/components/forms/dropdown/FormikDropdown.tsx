@@ -19,20 +19,29 @@ export function FormikDropdown({field, form: {errors}, ...props}: IFormikDropdow
     return errors[field.name] as string; 
   }
 
-  const validationMessage: string = getValidationMessage();
+  // const validationMessage: string = getValidationMessage();
 
   const handleChange = (value: any): void => {
     if (typeof field.name !== 'string') {
       return;
     }
-    setFieldValue(field.name, value);
+
+    let valueToSet;
+
+    if (!value) {
+      valueToSet = null;
+    } else if (value[props.itemKey]) {
+      valueToSet = value[props.itemKey]
+    }
+
+    setFieldValue(field.name, valueToSet);
   }
 
   return (
     <Dropdown
       {...props}
       setValue={handleChange}
-      validationMessage={validationMessage}
+      validationMessage={getValidationMessage()}
     />
   )
 }
