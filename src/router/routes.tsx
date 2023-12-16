@@ -2,13 +2,13 @@ import { Routes, Route } from "react-router-dom"
 import { AuthVerify } from "../auth/AuthVerify"
 import { ProtectedRoute } from "../auth/ProtectedRoute"
 import { RootLayout } from "../components/root-layout/RootLayout"
-import { CreateListing } from "../pages/create/listing/CreateListing"
 import { Home } from "../pages/home"
 import { Listing } from "../pages/listings/listing/Listing"
 import { Listings } from "../pages/listings/Listings"
 import { Login } from "../pages/login/Login"
 import { SignUp } from "../pages/sign-up/SignUp"
 import { SelfProfile } from "../pages/user-profile/self/SelfProfile"
+import { CreateListing } from "../pages/listings/listing/create/CreateListing"
 
 export const AllRoutes = () => {
   return (
@@ -20,7 +20,9 @@ export const AllRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/listings">
             <Route index element={<Listings />} />
-            {/* <Route element={<Listings />} path="page/:page"/> */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="create" element={<CreateListing />} />
+            </Route>
             <Route path=":id" element={<Listing />} />
           </Route>
 
@@ -30,9 +32,6 @@ export const AllRoutes = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/users">
               <Route index element={<SelfProfile />} path=':username' />
-            </Route>
-            <Route path="/create">
-              <Route path='listing' element={<CreateListing />}  />
             </Route>
           </Route>
 

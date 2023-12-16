@@ -1,14 +1,25 @@
 import { IListing } from "../../interfaces"
-import { ICreateListingParams, IGetListingsParams, IUpdatedListingImageParams } from "../../interfaces/listings/listingAPI"
-import { IFormData } from "../../pages/listings/listing/Listing"
+import { IUpdatedListingImageParams } from "../../interfaces/listings/listingAPI"
 import { IUpdatedListingParams } from "../../query-hooks/listings/useUpdateListing"
 import { ListingFilters } from "../../states/General"
 import { api, privateAPI } from "../apiConfig"
 
+// Listings
+export interface IPostListing {
+  title: string
+  description: string
+  price: number
+  category: number
+}
 export interface IUpdatedListing {
   status: number,
   message: string
   data: IListing
+}
+
+// Temporary images
+export interface IPostTemporaryImages {
+  files: FormData
 }
 
 const DEFAULT_PER_PAGE = 2;
@@ -23,8 +34,8 @@ export const getListings = async ({page = DEFAULT_PAGE, category}: ListingFilter
   }).then((response) => response.data)
 }
 
-export const createListing = async ({createListingFormData}: ICreateListingParams) => {
-  return await privateAPI.post('/listings', createListingFormData)
+export const createListing = async (data: IPostListing): Promise<any> => {
+  return await privateAPI.post('/listings', data).then((response) => response.data)
 }
 
 export const getListing = async (id: string | number): Promise<IListing> => {
@@ -37,4 +48,8 @@ export const updateListing = async ({formData, id}: IUpdatedListingParams): Prom
 
 export const updateListingImage = async ({updateImageFormData, id}: IUpdatedListingImageParams) => {
   return await privateAPI.patchForm(`/listings/${id}/images`, updateImageFormData).then((response) => response.data)
+}
+
+export const saveTemporaryImages = async ({files}: IPostTemporaryImages): Promise<any> => {
+  return await privateAPI.postForm('/listings/temporary-images', files).then((response) => response.data)
 }

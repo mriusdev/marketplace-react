@@ -5,7 +5,6 @@
 }
 
 .categories__container {
-  height: 10rem;
   width: 12rem;
   display: flex;
   flex-direction: column;
@@ -25,28 +24,22 @@
   transition: all 0.1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 
   &:hover {
-    background-color: rgb(247, 247, 247)
+    background-color: $main-clr-lighten-3;
   }
 }
 
 .categories__selected {
   color: rgb(64 64 64);
-  // background-color: rgb(197, 197, 197);
-  background-color: $cta-clr;
-  // background-color: $cta-clr-accent1;
-  // background-color: rgb(255, 245, 220);
-  outline: 1px solid black;
-  &:hover {
-    background-color: $cta-clr-accent1;
-  }
+  font-weight: 500;
+  background-color: $main-clr-lighten-3;
+
 }
 
 .categories__category__logo {
   padding: 0.5rem;
-  // background: lightgray;
   border-radius: 50%;
 }
 
 .categories__category__name {
-  font-weight: 500;
+  // font-weight: 500;
 }

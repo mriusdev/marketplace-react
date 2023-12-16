@@ -1,0 +1,54 @@
+@use '../../../styles/utilities' as *;
+@use '../forms.module.scss' as *;
+
+.dropdown__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown_input {
+  border: 1px solid gainsboro;
+  border-radius: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+}
+
+.dropdown_item_list {
+  list-style: none;
+  border-radius: 0.4rem;
+  width: 100%;
+  background-color: $clr-white;
+  border: 1px solid gainsboro;
+  position: absolute;
+  bottom: -11.1rem;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden;
+}
+
+.dropdown_item {
+  background-color: $clr-white;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  column-gap: 0.6rem;
+  &:hover {
+    background-color: $main-clr-lighten-4;
+  }
+  &:nth-child(odd) {
+    border-bottom: 1px solid gainsboro;
+    border-top: 1px solid gainsboro;
+  }
+  &:first-child {
+    border-top: none;
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}

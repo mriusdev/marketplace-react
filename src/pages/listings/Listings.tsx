@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './listings.module.scss'
 import { ListingsPagination } from './ListingsPagination'
 import { useStore } from '../../states/General'
+import { Button } from '../../components/buttons/Button'
 
 export const Listings = () => {
   const navigate = useNavigate()
@@ -71,6 +72,7 @@ export const Listings = () => {
     <div className={styles.main__container}>
       <section className={styles.sidenav__container}>
        <CategoriesSidebar />
+       <Button>Create New Listing</Button>
       </section>
 
       <section className={styles.listings__container}>

@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createListing } from "../../api/listings/listingsAPI";
+import { saveTemporaryImages } from "../../api/listings/listingsAPI";
 
-export default function useCreateListing() {
+export default function usePostTemporaryImages() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: createListing,
+    mutationFn: saveTemporaryImages,
     onSuccess: () => {
       queryClient.invalidateQueries(['listings'])
     }

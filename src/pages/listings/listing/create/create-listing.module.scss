@@ -1,0 +1,126 @@
+@use '../../../../styles/media-query-related' as *;
+@use '../../../../styles/utilities' as *;
+
+.create_listing__container {
+  @include default-container-width;
+}
+
+.create_listing__form_sections {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.listing_details__container {
+  width: 27rem;
+}
+
+.listing_posted_container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem
+}
+
+.create_listing_inputs_container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.8rem;
+}
+
+.create_listing_input {
+  display: flex;
+  flex-direction: column;
+}
+
+.listing__image_container {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem;
+}
+
+.listing__image {
+  width: 13rem;
+  height: 15rem;
+  object-fit: cover;
+}
+
+.listing__image_flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.listing__file_container {
+  width: 24rem;
+  border: 1px solid gainsboro;
+  border-radius: 0.5rem;
+  height: fit-content;
+}
+
+.listing__file_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+}
+
+.listing__files {
+  width: 100%;
+  height: auto;
+  display: grid;
+  gap: 1rem 0.7rem;
+  padding: 0.9rem 0.7rem;
+
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid gainsboro;
+}
+
+.listing__file {
+  list-style: none;
+  border: 1px solid $grey-clr;
+  border-radius: 0.5rem;
+  min-height: 5rem;
+  max-height: 5rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.listing__file_preview_and_name {
+  display: flex;
+  align-items: center;
+  column-gap: 0.7rem;
+  width: 20rem;
+
+  p {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(80%);
+  }
+}
+
+.listing__file_preview {
+  object-fit: cover;
+  border-radius: 0.5rem;
+  height: 5rem;
+  width: 5rem;
+}
+
+.listing__file_action_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: $clr-danger-background;
+  padding: 0.3rem;
+  color: $clr-danger-text;
+  align-self: stretch;
+  border-left: 1px solid $clr-danger-border;
+}

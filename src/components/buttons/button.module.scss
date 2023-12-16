@@ -1,0 +1,29 @@
+@use '../../styles/utilities' as *;
+
+.button {
+  border: 0;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  color: $text-dark;
+  display: flex;
+  justify-content: center;
+  column-gap: 0.5rem;
+  width: 100%;
+  border-radius: 0.6rem;
+
+  &:disabled {
+    background-color: $grey-clr;
+    cursor: not-allowed;
+  }
+}
+
+.button__primary {
+  @extend .button;
+  color: $clr-white;
+  background-color: $main-clr-lighten-1;
+}
+
+.button__secondary {
+  @extend .button;
+  background-color: turquoise;
+}
