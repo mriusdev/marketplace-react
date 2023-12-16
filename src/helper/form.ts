@@ -30,10 +30,6 @@ export function setToast(options: IToastOptions): void
   }
 
   if (options.options === 'loading') {
-    console.log('setting loading state');
-
-    // toast.loading('Loading', defaultOptions)
-
     if (toast.isActive(toastId)) {
       toast.update(toastId, {
         ...defaultOptions,
@@ -54,8 +50,6 @@ export function setToast(options: IToastOptions): void
         type: "error",
         isLoading: false
       })
-      console.log('updated toast');
-      
     } else {
       toast.error(options.message, defaultOptions)
       console.log('spawned new erro toast');
@@ -64,14 +58,6 @@ export function setToast(options: IToastOptions): void
   }
 
   if (options.options === 'success') {
-    console.log('setting success state');
-    // toast.update(toastId, {
-    //   ...defaultOptions,
-    //   render: options.message,
-    //   type: "success",
-    //   isLoading: false
-    // })
-
     if (toast.isActive(toastId)) {
       toast.update(toastId, {
         ...defaultOptions,

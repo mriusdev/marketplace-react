@@ -19,8 +19,6 @@ export function FormikDropdown({field, form: {errors}, ...props}: IFormikDropdow
     return errors[field.name] as string; 
   }
 
-  // const validationMessage: string = getValidationMessage();
-
   const handleChange = (value: any): void => {
     if (typeof field.name !== 'string') {
       return;

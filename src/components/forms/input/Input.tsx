@@ -15,10 +15,6 @@ function getClassName(): string
 const Input = React.forwardRef<
   HTMLInputElement, ICustomInputProps
 >(({...props}, ref) => {
-  // const propsCopy = {
-  //   ...props
-  // }
-  // props = propsCopy
   if (props.className === undefined) {
     delete props.className;
   }

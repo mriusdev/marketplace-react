@@ -88,7 +88,6 @@ export const CreateListing = () => {
       try {
         await postTemporaryImagesAsync({files});
       } catch (error) {
-        console.log('post temporary images error', error);
         setToast({
           options: 'error',
           message: parseErrorMessage(error) ?? ERRORS.GENERIC
@@ -105,7 +104,6 @@ export const CreateListing = () => {
       await postListingAsync(validatedValues)
       setToast({dismiss: true})
     } catch (error) {
-      console.log('post listing text data error', error);
       if (error instanceof AxiosError) {
         setToast({
           options: 'error',

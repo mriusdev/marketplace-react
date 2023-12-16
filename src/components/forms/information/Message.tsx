@@ -45,13 +45,10 @@ export default function Message(props: IMessageProps)
 
   function getStyle(): IMessageStyle
   {
-    // console.log('style class', `information__container_${getStyle().name}`);
-    
     return MessageStyles[getStyleName()];
   }
 
   return (
-    // <div className={styles[`information__container_${getStyle().name}`]}>
     <div className={`${styles.information__container} ${styles[`information__container_${getStyle().name}`]}`}>
       <div className={styles.information_icon__container}>
         <span className={`material-icons-outlined`}>
