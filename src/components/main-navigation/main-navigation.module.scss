@@ -131,6 +131,14 @@
   border-bottom: 1px solid utils.$grey-clr;
 }
 
+.main__nav_unregistered_actions_container {
+  @extend .text_sm;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.3rem;
+}
+
 #main__nav_search_bar {
   flex: 1;
   column-gap: 5px;

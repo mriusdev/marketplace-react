@@ -4,10 +4,13 @@ import { LoadingScreen } from '../../../components/data-fetching/loading/Loading
 import { publicS3Url } from '../../../helper/awsLinkFormatter';
 import { IListing } from '../../../interfaces';
 import useListing from '../../../query-hooks/listings/useListing';
-import useUpdateListing, { IUpdatedListingParams } from '../../../query-hooks/listings/useUpdateListing';
-import useUpdateListingImage from '../../../query-hooks/listings/useUpdateListingImage';
+// import useUpdateListing, { IUpdatedListingParams } from '../../../query-hooks/listings/useUpdateListing';
+// import useUpdateListingImage from '../../../query-hooks/listings/useUpdateListingImage';
 import styles from './listing.module.scss'
+import modListingStyles from './create/create-listing.module.scss'
 import AuthService from '../../../auth/AuthService';
+import { Button } from '../../../components/buttons/Button';
+import { ListingUpdate } from './update/ListingUpdate';
 
 export interface IFormData {
   title?: string
@@ -26,13 +29,13 @@ export const Listing = () => {
   })
   const [fileObject, setFileObject] = useState<File | undefined>(undefined)
 
-  const objectParams: IUpdatedListingParams = {
-    formData,
-    id
-  }
+  // const objectParams: IUpdatedListingParams = {
+  //   formData,
+  //   id
+  // }
   const { data: listing, isLoading, error } = useListing(id as string)
-  const { mutateAsync: mutateListingDataAsync, isLoading: isLoadingUpdate } = useUpdateListing(objectParams)
-  const { mutateAsync: mutateUpdateListingImageAsync, isLoading: isLoadingUpdateListingImage } = useUpdateListingImage({id})
+  // const { mutateAsync: mutateListingDataAsync, isLoading: isLoadingUpdate } = useUpdateListing(objectParams)
+  // const { mutateAsync: mutateUpdateListingImageAsync, isLoading: isLoadingUpdateListingImage } = useUpdateListingImage({id})
   console.log(listing);
   useEffect(() => {
     if (!formData.title && listing) {
@@ -51,29 +54,29 @@ export const Listing = () => {
     }))
   }
 
-  const handleListingUpdate = async (e: FormEvent) => {
-    e.preventDefault()
-    console.log('formData', formData);
-    try {
-      await mutateListingDataAsync({formData, id})
-    } catch (error) {
-      console.log('listing update error', error);
-    }
-  }
+  // const handleListingUpdate = async (e: FormEvent) => {
+  //   e.preventDefault()
+  //   console.log('formData', formData);
+  //   try {
+  //     await mutateListingDataAsync({formData, id})
+  //   } catch (error) {
+  //     console.log('listing update error', error);
+  //   }
+  // }
 
-  const handleListingImageUpdate = async (e: FormEvent) => {
-    e.preventDefault()
-    const updateImageFormData = new FormData()
-    updateImageFormData.append('id', listing?.listingImages[0].id as any)
-    updateImageFormData.append('path', listing?.listingImages[0].imageLocation as any)
-    updateImageFormData.append('file', fileObject as File)
-    try {
-      await mutateUpdateListingImageAsync({updateImageFormData, id})
-      setToggleEditImages(!toggleEditImages)
-    } catch (error) {
-      console.log('listing image update error', error);
-    }
-  }
+  // const handleListingImageUpdate = async (e: FormEvent) => {
+  //   e.preventDefault()
+  //   const updateImageFormData = new FormData()
+  //   updateImageFormData.append('id', listing?.listingImages[0].id as any)
+  //   updateImageFormData.append('path', listing?.listingImages[0].imageLocation as any)
+  //   updateImageFormData.append('file', fileObject as File)
+  //   try {
+  //     await mutateUpdateListingImageAsync({updateImageFormData, id})
+  //     setToggleEditImages(!toggleEditImages)
+  //   } catch (error) {
+  //     console.log('listing image update error', error);
+  //   }
+  // }
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFileObject(undefined)
@@ -88,10 +91,32 @@ export const Listing = () => {
     })
   }
 
+  function handleListingEditViewUnmount(): void
+  {
+    console.log('handle listing edit called');
+    
+    setToggleEdit(!toggleEdit);
+  }
+
+  if (toggleEdit && listing) {
+    return (
+      <ListingUpdate
+        viewUnmount={handleListingEditViewUnmount}
+        listingTextData={{
+          title: listing.title,
+          price: parseInt(listing.price),
+          description: listing.description
+        }}
+        listingImages={listing.listingImages}
+        id={id as string}
+      />
+    )
+  }
+
   return (
     <div className={styles.listing__container}>
       <div className={styles.listing__content}>
-        {toggleEdit ? (
+        {/* {toggleEdit ? (
           <form onSubmit={handleListingUpdate} className={styles.listing__form_container}>
             <div>
               <h1>
@@ -158,17 +183,53 @@ export const Listing = () => {
               <span className={styles.listing__description_text}>{listing?.description}</span>
             </div>
           </div>
-        )}
-        {
-          AuthService.isLoggedIn() &&
-          <button className={styles.listing__edit_btn} onClick={() => setToggleEdit(!toggleEdit)}>
-            {toggleEdit ? (
-              <span>Cancel</span>
-            ) : (
-              <span>Edit</span>
-            )}
-          </button>
-        }
+        )} */}
+        <div className={styles.listing__read_container}>
+            <div className={styles.listing__image_container}>
+              <img src={ listing?.listingImages[0]?.imageLocation ? publicS3Url(listing.listingImages[0].imageLocation) : "https://source.unsplash.com/random/50×50/?shirt"} alt="" />
+              {/* {
+                AuthService.isLoggedIn() &&
+                <div
+                  className={styles.listing__image_edit_pompt}
+                  onClick={() => setToggleEditImages(!toggleEditImages)}
+                >
+                  {toggleEditImages ? (
+                    <span id={styles.listing__image_edit_icon} className="material-icons-outlined">close</span>
+                  ) : (
+                    <span id={styles.listing__image_edit_icon} className="material-icons-outlined">edit</span>
+                  )}
+                </div>
+              }
+              {toggleEditImages && (
+                <form className={styles.listing__image_edit_container} onSubmit={handleListingImageUpdate}>
+                  <div className={styles.listing__image_edit_actions}>
+                    <input type="file" name="image" id="image" accept="image/*" onChange={onFileChange} />
+                  </div>
+                  <button className={styles.listing__image_save_button}>Save changes</button>
+                </form>
+              )} */}
+            </div>
+            <div className={styles.listing__read_details_container}>
+              <div>
+                <span className={styles.listing__title_text}>{listing?.title}</span>
+                {AuthService.isLoggedIn() &&
+                  <Button onClick={() => setToggleEdit(!toggleEdit)}>
+                    {toggleEdit ? (
+                      <span>Cancel</span>
+                    ) : (
+                      <span>Edit</span>
+                    )}
+                  </Button>
+                }
+              </div>
+              <span className={styles.listing__small_text}>{listing?.price}</span>
+              <span className={styles.listing__extra_small_text}>Listed on {listing?.createdAt}</span>
+              <div className={styles.listing__horizontal_divider} />
+              <span className={styles.listing__description_meta}>Seller's description</span>
+              <span className={styles.listing__description_text}>{listing?.description}</span>
+            </div>
+          </div>
+
       </div>
     </div>
   )

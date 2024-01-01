@@ -30,7 +30,7 @@ export interface IInitialListingTextData {
   category: number | null
 }
 
-interface IFiles {
+export interface IFiles {
   file: File
   previewUrl: string
 }

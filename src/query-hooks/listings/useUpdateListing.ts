@@ -1,15 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { IUpdatedListing, updateListing } from "../../api/listings/listingsAPI";
-import { IListing } from "../../interfaces";
+import { IUpdateListing, updateListing } from "../../api/listings/listingsAPI";
+// import { IListing } from "../../interfaces";
 import { IFormData } from "../../pages/listings/listing/Listing";
 
 
-export interface IUpdatedListingParams {
-  formData: IFormData
-  id: string | undefined
-}
+// export interface IUpdatedListingParams {
+//   formData: IFormData
+//   id: string | undefined
+// }
 
-export default function useUpdateListing({formData, id}: IUpdatedListingParams) {
+export default function useUpdateListing(id: string) {
+// export default function useUpdateListing({id}: IUpdateListing) {
   const queryClient = useQueryClient()
 
   return useMutation({

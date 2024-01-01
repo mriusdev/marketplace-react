@@ -5,11 +5,12 @@ import { ToastOptions } from "react-toastify/dist/types";
 const toastId = "general";
 
 export const VALIDATION_MESSAGES = {
-  REQUIRED: 'Required'
+  REQUIRED: 'Required',
+  NO_SAME_CONTENT: 'Fields cannot be the same'
 }
 
 interface IToastOptions {
-  options?: "loading" | "error" | "success"
+  options?: "loading" | "error" | "success" | "info"
   message?: string
   dismiss?: boolean
 }
@@ -67,6 +68,19 @@ export function setToast(options: IToastOptions): void
       })
     } else {
       toast.success(options.message, defaultOptions)
+    }
+  }
+
+  if (options.options === 'info') {
+    if (toast.isActive(toastId)) {
+      toast.update(toastId, {
+        ...defaultOptions,
+        render: options.message,
+        type: "info",
+        isLoading: false
+      })
+    } else {
+      toast.info(options.message, defaultOptions)
     }
   }
 }
