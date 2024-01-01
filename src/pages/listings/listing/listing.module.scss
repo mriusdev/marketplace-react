@@ -51,7 +51,8 @@
 
 .listing__read_details_container {
   border-left: 0.1rem solid $grey-clr;
-  width: 40%;
+  // width: 40%;
+  width: 24rem;
   padding: 0.5rem 1rem;
 }
 
@@ -60,6 +61,7 @@
   display: block;
   font-size: 1.4rem;
   font-weight: 600;
+  width: 17.5rem;
 }
 
 .listing__small_text {

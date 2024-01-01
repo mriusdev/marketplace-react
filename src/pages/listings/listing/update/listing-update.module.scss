@@ -1,0 +1,17 @@
+@use '../../../../styles/utilities' as *;
+
+.modify_listing_page_title__container {
+  display: flex;
+  align-items: center;
+  column-gap: 0.8rem;
+  padding: 2rem 0;
+}
+
+.modify_listing_page_title_actions__container {
+  display: flex;
+  justify-content: center;
+  background: $main-clr-lighten-2;
+  border-radius: 2rem;
+  padding: 0.2rem;
+  cursor: pointer;
+}

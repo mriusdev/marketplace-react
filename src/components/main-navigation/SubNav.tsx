@@ -10,7 +10,17 @@ export const SubNav = (props: Props) => {
     <div className={styles.sub_nav__actions}>
       {
         !AuthService.isLoggedIn() &&
-        <span className={styles.text_sm}>Login / Regiser</span>
+        <div className={styles.main__nav_unregistered_actions_container}>
+          <Link to={'login'}>
+            Login
+          </Link>
+          <span>/</span>
+          <Link to={'signup'}>
+            Register
+          </Link>
+        </div>
+        // <span className={styles.text_sm}>Login / Regiser</span>
+        // <span className={styles.text_sm}>Login / Regiser</span>
       }
       <div className={styles.sub_nav__options}>
         {
